@@ -1,0 +1,16 @@
+#
+#
+# main() será executado quando você chamar essa ação
+#
+# @param As ações do Cloud Functions aceitam um único parâmetro, que deve ser um objeto JSON.
+#
+# @return A saída dessa ação, que deve ser um objeto JSON.
+#
+#
+import sys
+import requests
+
+def main(dict):
+    req = requests.get('https://brasilapi.com.br/api/cnpj/v1/' + dict['cnpj'])
+    data = req.json()
+    return {'cnpj': data['cnpj'], 'nome': data['razao_social'], 'uf': data['uf'], 'municipio': data['municipio']}
